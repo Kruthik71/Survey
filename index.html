@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey</title>
+    <script>
+        /*
+        function validity(){
+            for(let i=1;i<=5;i++){
+                var inputnumber=document.getElementById(`num${i}`);
+                inputnumber.addEventListener("input",function(){
+                    var value=parseInt(inputnumber.value);
+                    if(value<0 || value>5){
+                        inputnumber.setCustomValidity("Inputted Value is out of bound");
+                    }
+                    else{
+                        inputnumber.setCustomValidity("");
+                    }
+                });
+            }
+        }
+        */
+
+        function drawgraph(){
+            var canvas=document.getElementById("bargraphcreation");
+            var ctx=canvas.getContext("2d");
+
+            var values=[];
+            for(let i=1;i<=5;i++){
+                var inputnumber=document.getElementById(`num${i}`);
+                var value=parseInt(inputnumber.value);
+                values.push(value);
+            }
+            var width_of_bar=70;
+            var space_in_between=20;
+            var max_y=canvas.height-30;
+            var one_to_five=30;
+
+            for(let i=0;i<values.length;i++){
+                var x=35+i*(width_of_bar+space_in_between);
+                var height=values[i]*one_to_five;
+                var y=max_y-height;
+                var colors=['yellow','red','blue','green','white'];
+                var color=colors[i];
+                ctx.fillStyle=color;
+                ctx.fillRect(x,y,width_of_bar,height);
+                
+            }
+        }
+        
+    </script>
+    <style>
+        body{
+            text-align: center;
+            background-color: rgb(197, 126, 34);
+            font-family: Arial, sans-serif;
+        }
+        h2{
+            font-size: 36px;
+            text-decoration: underline;
+            color: rgb(70, 70, 120);
+        }
+        .labels{
+            font-weight: 600;
+            font-size: 24px;
+            color: rgb(70, 70, 120);
+        }
+        .btn{
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: rgb(70, 70, 120);
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        canvas{
+            border: 2px solid black;
+            margin: 20px auto;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <h2 for="cafeteria"><i>Cafeteria Survey</h2> <br>
+        <div>
+        <label for="Ambience" style="margin-right: 10px;" class="labels">Ambience of Cafeteria : </label> 
+        <input type="number" min="1" max="5" placeholder="Select a value" style="width: 100px;" id="num1" required autofocus/> <br> <br>
+            
+        <label for="Quality" style="margin-right: 10px;" class="labels">Quality of Food : </label>
+        <input type="number" min="1" max="5" placeholder="Select a value" style="width: 100px;" id="num2" required/> <br> <br>
+            
+        <label for="Variety" style="margin-right: 10px;" class="labels">Variety of foods : </label>
+        <input type="number" min="1" max="5" placeholder="Select a value" style="width: 100px;" id="num3" required/> <br> <br>
+            
+        <label for="Price" style="margin-right: 10px;" class="labels">Price of items (Satisfaction) : </label>
+        <input type="number" min="1" max="5" placeholder="Select a value" style="width: 100px;" id="num4" required/> <br> <br>
+            
+        <label for="Staff" style="margin-right: 10px;" class="labels">Staff Interaction : </label>
+        <input type="number" min="1" max="5" placeholder="Select a value" style="width: 100px;" id="num5" required/> <br> <br>
+    </div>
+        <input type="button" value="Create Graph" onclick="drawgraph()" class="btn" > <br> <br>
+        <canvas id="bargraphcreation" width="500px" height="200px"></canvas>
+    </form>
+    <footer style="text-align: center;">
+        <p>&copy; KRUTHIK B 2023 (V_5718) | <a href="">GitHub</p>
+    </footer>
+</body>
+</html>
